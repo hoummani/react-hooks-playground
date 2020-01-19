@@ -1,17 +1,23 @@
 /* eslint-disable react/no-direct-mutation-state */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import './App.scss'
 
 export default function App (){
   const [counter, setCounter] = useState(0);
+  const [title, setTitle] = useState('React Hooks');
   
   function countUp(){
     setCounter(counter+1);
   }
-  function countInit() {
-    setCounter(0);
+  function handleTitle() {
+    setTitle('useEffect Hook');
   }
+
+  useEffect(() => {
+    console.log('Inside useEffect 1');
+    document.title= title;
+  }, [title]);
 
   return (
     <div className="container" style={{ marginTop: '25px', padding: '20px' }}>
@@ -37,9 +43,9 @@ export default function App (){
             <button 
               className="button is-secondary" 
               type="button"
-              onClick={countInit}
+              onClick={handleTitle}
             >
-                <strong>CountInit</strong>
+                <strong>Update Title</strong>
             </button>
           </div>
         </div>
